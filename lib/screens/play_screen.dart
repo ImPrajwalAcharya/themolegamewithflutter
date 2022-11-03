@@ -3,6 +3,7 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:themole/globaldata/players.dart';
 import 'package:themole/globaldata/random_choice.dart';
+import 'package:themole/screens/voting_screen.dart';
 import 'package:themole/widgets/itemlistview.dart';
 
 class PlayScreen extends StatefulWidget {
@@ -20,36 +21,53 @@ class _PlayScreenState extends State<PlayScreen> {
     return Scaffold(
       body: SafeArea(
         child: Center(
-          child: 
-          index>=playerList.length ?
-          ItemShowScreen():
-          counter % 2 == 0
+          child: index >= playerList.length
               ? Column(
                   children: [
-                    Text('Are You ${playerList[index]}'),
-                    TextButton(
-                        onPressed: (() {
-                          setState(() {
-                            
-                            counter++;
-                          });
-                        }),
-                        child: Text('yes'))
+                    Expanded(child: ItemShowScreen()),
+                    Container(
+                      height: MediaQuery.of(context).size.height * 0.1,
+                      child: TextButton(
+                          onPressed: () {
+                            Navigator.of(context)
+                                .pushReplacement(MaterialPageRoute(
+                              builder: (context) {
+                                return VotingScreen();
+                              },
+                            ));
+                          },
+                          child: Text('Proceed')),
+                    )
                   ],
                 )
-              : Column(
-                  children: [
-                    Text(playerObj[index].isMole?'You are The Mole':'Your Word is $randomChoiceItem'),
-                    TextButton(
-                        onPressed: (() {
-                          setState(() {
-                            counter++;
-                            index++;
-                          });
-                        }),
-                        child: Text('confirm'))
-                  ],
-                ),
+              : counter % 2 == 0
+                  ? Column(
+                      children: [
+                        Text('Are You ${playerList[index]}'),
+                        TextButton(
+                            onPressed: (() {
+                              setState(() {
+                                counter++;
+                              });
+                            }),
+                            child: Text('yes'))
+                      ],
+                    )
+                  : Column(
+                      children: [
+                        Text(playerObj[index].isMole
+                            ? 'You are The Mole'
+                            : 'Your Word is $randomChoiceItem'),
+                        TextButton(
+                            onPressed: (() {
+                              setState(() {
+                                counter++;
+                                index++;
+                              });
+                            }),
+                            child: Text('confirm'))
+                      ],
+                    ),
         ),
       ),
     );

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:themole/globaldata/players.dart';
 import 'package:themole/screens/catrgories_screen.dart';
-import 'package:themole/widgets/playersform.dart';
+
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});
@@ -82,6 +82,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                           });
                                           itemcount--;
                                           _playername[itemcount].clear();
+                                          
                                         });
                                       }
                                     }),

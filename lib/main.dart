@@ -13,6 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'the mole',
       theme: ThemeData(
       colorScheme: Theme.of(context).colorScheme.copyWith(

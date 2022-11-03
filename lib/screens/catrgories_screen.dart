@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:themole/globaldata/categorydata.dart';
+import 'package:themole/globaldata/players.dart';
 import 'package:themole/screens/play_screen.dart';
 
 class CategoryScreen extends StatefulWidget {
@@ -58,6 +59,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
           Center(
             child: TextButton(
                 onPressed: (() {
+                  makemole();
                   selectcategoryrandomly();
                   Navigator.of(context).pushReplacement(
                     MaterialPageRoute(

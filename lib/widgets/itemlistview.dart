@@ -1,35 +1,41 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:themole/globaldata/random_choice.dart';
 
-class ItemShowScreen extends StatelessWidget {
+class ItemShowScreen extends StatefulWidget {
   const ItemShowScreen({super.key});
 
   @override
+  State<ItemShowScreen> createState() => _ItemShowScreenState();
+}
+
+class _ItemShowScreenState extends State<ItemShowScreen> {
+  int? istapped;
+  @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        
-        Expanded(
-          
-          child: GridView.builder(
-            gridDelegate:
-                SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3,mainAxisSpacing: 2,),
-                itemCount: randomChoiceCategory!.items.length,
-            itemBuilder: (context, index) {
-              return Container(child: Text(randomChoiceCategory!.items[index]));
-            },
-          ),
+    return Container(
+      margin: EdgeInsets.only(top: 24),
+      child: GridView.builder(
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 3,
+          mainAxisSpacing: 2,
         ),
-        Container(
-          height: MediaQuery.of(context).size.height*0.1,
-          child: TextButton(onPressed: () {
-            
-          }, child: Text('Proceed')),
-        )
-        
-      ],
+        itemCount: randomChoiceCategory!.items.length,
+        itemBuilder: (context, index) {
+          return InkWell(
+            onTap: () {
+              setState(() {
+                istapped = index;
+              });
+              moleAns = randomChoiceCategory!.items[index];
+            },
+            child: Container(
+                decoration: BoxDecoration(
+                    color: istapped == index ? Colors.green : Colors.white,
+                    border: Border.all(width: 1, color: Colors.black)),
+                child: Center(child: Text(randomChoiceCategory!.items[index]))),
+          );
+        },
+      ),
     );
   }
 }
